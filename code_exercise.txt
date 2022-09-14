@@ -1,0 +1,56 @@
+1: Data Read - API (Get)
+=========================
+
+Create an API that returns a list of 50 hotels. The required API features are:
+
+REQUEST:  GET /hotels/list
+RESPONSE: JSON with a list of 50 hotels named randomly (Hotel 1, Hotel 2....)
+
+2: Data Read - API (Post)
+=========================
+Create an API with the following characteristics:
+
+REQUEST: POST /hotels/data
+BODY: A JSON with the structure similar to the following example
+	{ "hotels":
+			["Hotel 1", "Hotel 2", "Hotel 3"], 
+	  "dateFrom": "2022-01-01", 
+	  "dateTo": "2022-05-30" }
+
+RESPONSE: As a response we will obtain a JSON where the following fields will be informed:
+
+	* DailyMinPrices: List of minimum prices of every hotel for every day in the date range selected
+	* DailyMaxPrices: List of maximun prices of every hotel for every day in the date range selected
+	* DailyAvgPrices: List of average prices of every hotel for every day in the date range selected
+	* MoreExpensiveHotel: Name of the hotel that on average, in the whole range, it has the highest prices
+	* CheapestHotel: Name of the hotel that on average, in the whole range, it has the lowest prices
+	* MoreExpensiveDay: Day when prices are the highest in all date range
+
+Don't worry about the final json structure. There is no fixed requirements for it, just build the final json with all the the information in the most clearly way possible.
+
+Your bussiness logic inside the API should do: 
+
+	1. Create a random list of prices for every hotel and every date in the range selected. At least 5 prices for hotel and date. 
+	   Every price, will have a structure like this one:
+
+		{"hotel": "Hotel 1", "date": "2022-06-01", "board": "All Inclusive", "room": "Double"}
+
+	2. Using the random list generated in point 1 and asuming that every item in the list is a price with the structure showed in point 2, calculate the exptected results.
+
+
+3: Data Ingestion
+===================
+
+You will find a CSV file attached. Update the code of previous exercise in order to read the list of hotel prices from that file.
+
+To read the file in every POST request is not an option.... you should find a way to read the file only the first time than the API is called. After that, all request should read the list of prices from a different repository with better performance than the file reading. Find the best solution to achieve it.
+
+By the way, a local database is not an option, that will happens in the next exercise.
+
+4: Data Storage
+================
+Create a local database using SQLite 
+Create a proper model to save all prices read from prices.csv file.
+Create a API endpoint that read the content from the CSV file and save it into database.
+Update the code of exercise 2.2 and read the list of prices from database.
+You can use a ORM if you wish.
